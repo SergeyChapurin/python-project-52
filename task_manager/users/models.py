@@ -11,4 +11,4 @@ class User(AbstractUser):
         return self.get_full_name()
 
     def get_absolute_url(self):
-        return reverse('users:index')
+        return reverse('users_index')

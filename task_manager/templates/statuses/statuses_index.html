@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+{% bootstrap_messages %}
+
+<div class="container wrapper flex-grow-1">
+  <h1 class="my-4 text-white">{% trans "Статусы" %}</h1>
+    <a class="btn btn-warning mb-3" href="/statuses/create/">{% trans "Создать статус" %}</a>
+  <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="text-white">ID</th>
+                <th class="text-white">{% trans "Имя" %}</th>
+                <th class="text-white">{% trans "Дата создания" %}</th>
+                <th></th>
+            </tr>
+            </thead>
+            {% for status in statuses %}
+            <tbody>
+            <tr>
+                <td class="text-white">{{ status.id }}</td>
+                <td class="text-white">{{ status.name }}</td>
+                <td class="text-white">{{ status.created_at|date:"d.m.Y H:i"  }}</td>
+                <td>
+                    <a href="{% url 'status_update' status.id %}" class="text-primary">{% trans "Изменить" %}</a>
+                    <br>
+                    <a href="{% url 'status_delete' status.id %}" class="text-danger">{% trans "Удалить" %}</a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}
