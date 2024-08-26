@@ -34,3 +34,19 @@ class CheckUserMixin(UserPassesTestMixin):
             extra_tags='danger'
         )
         return HttpResponseRedirect(reverse_lazy('users_index'))
+
+
+class CheckAuthorMixin(UserPassesTestMixin):
+    permission_denied_message = _("Задачу может удалить только ее автор")
+
+    def test_func(self):
+        task = self.get_object()
+        return self.request.user.pk == task.author.pk
+
+    def handle_no_permission(self):
+        messages.error(
+            self.request,
+            self.permission_denied_message,
+            extra_tags='danger'
+        )
+        return HttpResponseRedirect(reverse_lazy('tasks_index'))

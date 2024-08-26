@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block content %}
+
+{% bootstrap_messages %}
+
+<div class="container wrapper flex-grow-1">
+
+  <h1 class="my-4 text-white">{% trans "Создать задачу" %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label text-white" for="id_name">{% trans "Имя" %}</label>
+            <input type="text" name="name" maxlength="150" class="form-control" placeholder="{% trans 'Имя' %}" required id="id_name">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-white" for="id_description">{% trans "Описание" %}</label>
+            <textarea name="description" cols="40" rows="10" class="form-control" placeholder="{% trans 'Описание' %}" id="id_description"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-white" for="id_status">{% trans "Статус" %}</label>
+            <select name="status" class="form-select" required id="id_status">
+              <option value="" selected>---------</option>
+              {% for status in statuses %}
+              <option value="{{ status.id }}" {% if status.id == selected_status_id %}selected{% endif %}>
+                  {{ status.name }}
+              </option>
+              {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-white" for="id_executor">{% trans "Исполнитель" %}</label>
+            <select name="executor" class="form-select mr-3 ml-2" id="id_executor">
+              <option value="" selected>---------</option>
+              {% for user in users %}
+              <option value="{{ user.id }}" {% if user.id == selected_executor_id %}selected{% endif %}>
+                  {{ user.first_name }} {{ user.last_name }}
+              </option>
+              {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-white" for="id_label">{% trans "Метки" %}</label>
+            <select name="labels" class="form-select" id="id_labels" multiple>
+                {% for label in labels %}
+                <option value="{{ label.id }}" {% if label.id == selected_label_id %}selected{% endif %}>
+                    {{ label.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <input class="btn btn-warning" type="submit" value="{% trans 'Создать' %}">
+
+    </form>
+</div>
+
+{% endblock %}

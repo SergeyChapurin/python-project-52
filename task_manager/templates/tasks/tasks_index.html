@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block content %}
+
+{% bootstrap_messages %}
+
+<div class="container wrapper flex-grow-1">
+
+  <h1 class="my-4 text-white">{% trans "Задачи" %}</h1>
+  <a class="btn btn-warning mb-3" href="{% url 'task_create' %}" role="button">{% trans "Создать задачу" %}</a>
+
+<div class="card mb-3">
+  <div class="card-body bg-dark">
+    <form class="form-inline center" method="get">
+
+      <div class="mb-3">
+        <label class="form-label text-white" for="id_status">{% trans "Статус" %}</label>
+        <select name="status" class="form-select ml-2 mr-3" id="id_status">
+          <option value="" selected>---------</option>
+          {% for status in statuses %}
+              <option value="{{ status.id }}" {% if status.id == selected_status_id %}selected{% endif %}>
+                  {{ status.name }}
+              </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label text-white" for="id_executor">{% trans "Исполнитель" %}</label>
+        <select name="executor" class="form-select mr-3 ml-2" id="id_executor">
+          <option value="" selected>---------</option>
+          {% for user in users %}
+              <option value="{{ user.id }}" {% if user.id == selected_executor_id %}selected{% endif %}>
+                  {{ user.first_name }} {{ user.last_name }}
+              </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label text-white" for="id_label">{% trans "Метка" %}</label>
+        <select name="label" class="form-select ml-2 mr-3" id="id_label">
+          <option value="" selected>---------</option>
+          {% for label in labels %}
+              <option value="{{ label.id }}" {% if label.id == selected_label_id %}selected{% endif %}>
+                  {{ label.name }}
+              </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-check"><input type="checkbox" name="self_tasks" class="form-check-input mr-3" id="id_self_tasks">
+          <label class="form-check-label text-white" for="id_self_tasks">{% trans "Только свои задачи" %}</label>
+        </div>
+      </div>
+        <input class="btn btn-warning" type="submit" value="{% trans 'Показать' %}">
+    </form>
+  </div>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="text-white">ID</th>
+      <th class="text-white">{% trans "Имя" %}</th>
+      <th class="text-white">{% trans "Статус" %}</th>
+      <th class="text-white">{% trans "Автор" %}</th>
+      <th class="text-white">{% trans "Исполнитель" %}</th>
+      <th class="text-white">{% trans "Дата создания" %}</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  {% for task in tasks %}
+
+  <tbody>
+    <tr>
+      <td class="text-white">{{ task.id }}</td>
+      <td class="text-white">
+        <a href="{% url 'task_detail' task.id %}" style="color: orange;">{{ task.name }}</a>
+      </td>
+      <td class="text-white">{{ task.status }}</td>
+      <td class="text-white">{{ task.author }}</td>
+      <td class="text-white">{{ task.executor }}</td>
+      <td class="text-white">{{ task.created_at|date:"d.m.Y H:i"  }}</td>
+      <td>
+        <a href="{% url 'task_update' task.id %}" class="text-primary">{% trans "Изменить" %}</a>
+        <br>
+        <a href="{% url 'task_delete' task.id %}" class="text-danger">{% trans "Удалить" %}</a>
+      </td>
+    </tr>
+  </tbody>
+
+  {% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}
