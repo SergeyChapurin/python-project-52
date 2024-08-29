@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext as _
 
+from task_manager.labels.models import Label
 from task_manager.mixins import CustomLoginRequiredMixin, CheckAuthorMixin
 from task_manager.statuses.models import Status
 from task_manager.tasks.forms import TaskForm
@@ -19,6 +20,7 @@ class TasksIndexView(CustomLoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['statuses'] = Status.objects.all()
         context['users'] = User.objects.all()
+        context['labels'] = Label.objects.all()
         return context
 
 
@@ -38,12 +40,6 @@ class TaskCreateView(CustomLoginRequiredMixin,
     success_url = reverse_lazy('tasks_index')
     success_message = _('Задача успешно создана')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['statuses'] = Status.objects.all()
-        context['users'] = User.objects.all()
-        return context
-
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -57,12 +53,6 @@ class TaskUpdateView(CustomLoginRequiredMixin,
     template_name = 'tasks/task_update.html'
     success_url = reverse_lazy('tasks_index')
     success_message = _('Задача успешно изменена')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['statuses'] = Status.objects.all()
-        context['users'] = User.objects.all()
-        return context
 
 
 class TaskDeleteView(CustomLoginRequiredMixin,

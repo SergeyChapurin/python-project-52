@@ -9,28 +9,14 @@
 
 <div class="container wrapper flex-grow-1">
 
-    <h1 class="my-4 text-white">{% trans "Регистрация" %}</h1>
+    <h1 class="my-4 text-white">{% trans "Изменение метки" %}</h1>
     <form method="post" class="text-white">
         {% csrf_token %}
 
         {% bootstrap_form form %}
 
-        <input class="btn btn-warning" type="submit" value="{% trans 'Зарегистрировать' %}">
+        <input class="btn btn-warning" type="submit" value="{% trans 'Изменить' %}">
     </form>
 </div>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

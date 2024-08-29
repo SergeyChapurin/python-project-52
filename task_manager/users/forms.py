@@ -3,6 +3,7 @@ from task_manager.users.models import User
 
 
 class UsersForm(UserCreationForm):
+    usable_password = None
 
     class Meta:
         model = User

@@ -1,3 +1,6 @@
+from django.contrib import messages
+from django.db.models import ProtectedError
+from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -41,3 +44,13 @@ class StatusDeleteView(CustomLoginRequiredMixin,
     template_name = 'statuses/status_delete.html'
     success_url = reverse_lazy('statuses_index')
     success_message = _('Статус успешно удален')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(
+                request,
+                _("Невозможно удалить статус, потому что он используется")
+            )
+            return redirect(self.success_url)

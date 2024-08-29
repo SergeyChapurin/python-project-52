@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+{% bootstrap_messages %}
+
+<div class="container wrapper flex-grow-1">
+  <h1 class="my-4 text-white">{% trans "Метки" %}</h1>
+    <a class="btn btn-warning mb-3" href="/labels/create/">{% trans "Создать метку" %}</a>
+  <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="text-white">ID</th>
+                <th class="text-white">{% trans "Имя" %}</th>
+                <th class="text-white">{% trans "Дата создания" %}</th>
+                <th></th>
+            </tr>
+            </thead>
+            {% for label in labels %}
+            <tbody>
+            <tr>
+                <td class="text-white">{{ label.id }}</td>
+                <td class="text-white">{{ label.name }}</td>
+                <td class="text-white">{{ label.created_at|date:"d.m.Y H:i"  }}</td>
+                <td>
+                    <a href="{% url 'label_update' label.id %}" class="text-primary">{% trans "Изменить" %}</a>
+                    <br>
+                    <a href="{% url 'label_delete' label.id %}" class="text-danger">{% trans "Удалить" %}</a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}

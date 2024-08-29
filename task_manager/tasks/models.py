@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from task_manager.labels.models import Label
 from task_manager.users.models import User
 from task_manager.statuses.models import Status
 
@@ -40,6 +41,14 @@ class Task(models.Model):
         verbose_name=_('Статус')
     )
 
+    labels = models.ManyToManyField(
+        Label,
+        through='IntermediateLabelForTask',
+        related_name='labels',
+        verbose_name=_('Метки'),
+        blank=True
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_('Дата создания')
@@ -50,3 +59,15 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class IntermediateLabelForTask(models.Model):
+    label = models.ForeignKey(
+        Label,
+        on_delete=models.PROTECT
+    )
+
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE
+    )

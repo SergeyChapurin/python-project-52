@@ -10,12 +10,11 @@
 <div class="container wrapper flex-grow-1">
 
     <h1 class="my-4 text-white">{% trans "Создать статус" %}</h1>
-    <form method="post">
+    <form method="post" class="text-white">
         {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label text-white" for="id_name">{% trans "Имя" %}</label>
-            <input type="text" name="name"  maxlength="100" class="form-control" placeholder="Имя" required id="id_name">
-        </div>
+
+        {% bootstrap_form form %}
+
         <input class="btn btn-warning" type="submit" value="{% trans 'Создать' %}">
     </form>
 </div>
