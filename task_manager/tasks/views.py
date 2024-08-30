@@ -1,27 +1,20 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext as _
+from django_filters.views import FilterView
 
-from task_manager.labels.models import Label
 from task_manager.mixins import CustomLoginRequiredMixin, CheckAuthorMixin
-from task_manager.statuses.models import Status
+from task_manager.tasks.filter import FilterTasks
 from task_manager.tasks.forms import TaskForm
 from task_manager.tasks.models import Task
-from task_manager.users.models import User
 
 
-class TasksIndexView(CustomLoginRequiredMixin, ListView):
+class TasksIndexView(CustomLoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/tasks_index.html'
-    context_object_name = 'tasks'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['statuses'] = Status.objects.all()
-        context['users'] = User.objects.all()
-        context['labels'] = Label.objects.all()
-        return context
+    filterset_class = FilterTasks
+    context_object_name = 'filtered_tasks'
 
 
 class TaskDetailView(DetailView):
