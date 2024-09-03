@@ -18,6 +18,7 @@ django-bootstrap5 = "^24.2"
 dj-database-url = "^2.2.0"
 django-filter = "^24.3"
 rollbar = "^1.0.0"
+coverage = "^7.6.1"
 
 
 [tool.poetry.group.dev.dependencies]
