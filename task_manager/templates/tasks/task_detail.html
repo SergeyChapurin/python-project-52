@@ -48,9 +48,9 @@
 
     <div class="row p-1">
         <div class="col">
-          <a href="{% url 'task_update' task.id %}" class="text-primary">Изменить</a>
+          <a href="{% url 'task_update' task.id %}" class="text-primary">{% trans "Изменить" %}</a>
           <br>
-          <a href="{% url 'task_delete' task.id %}" class="text-danger">Удалить</a>
+          <a href="{% url 'task_delete' task.id %}" class="text-danger">{% trans "Удалить" %}</a>
         </div>
     </div>
 

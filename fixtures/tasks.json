@@ -1,0 +1,146 @@
+[
+{
+  "model": "tasks.task",
+  "pk": 1,
+  "fields": {
+    "name": "Как организовать анализ большого объема данных в реальном времени",
+    "description": "",
+    "author": 2,
+    "executor": 1,
+    "status": 1,
+    "created_at": "2024-08-28T12:29:26.274Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 2,
+  "fields": {
+    "name": "ООП не определяет архитектуру проекта",
+    "description": "",
+    "author": 2,
+    "executor": 1,
+    "status": 1,
+    "created_at": "2024-08-28T12:31:48.016Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 3,
+  "fields": {
+    "name": "1",
+    "description": "",
+    "author": 2,
+    "executor": 3,
+    "status": 1,
+    "created_at": "2024-08-29T11:12:31.756Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 5,
+  "fields": {
+    "name": "Написать тесты",
+    "description": "",
+    "author": 7,
+    "executor": 5,
+    "status": 3,
+    "created_at": "2024-08-29T11:36:15.125Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 6,
+  "fields": {
+    "name": "Проверить создание задач",
+    "description": "Проверить, чтобы при создании задач можно было выбрать и прикрепить несколько меток",
+    "author": 7,
+    "executor": 7,
+    "status": 1,
+    "created_at": "2024-08-29T12:03:32.309Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 7,
+  "fields": {
+    "name": "Задача Дена",
+    "description": "",
+    "author": 8,
+    "executor": 1,
+    "status": 3,
+    "created_at": "2024-08-29T12:44:47.259Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 8,
+  "fields": {
+    "name": "Задача Родри",
+    "description": "",
+    "author": 4,
+    "executor": 6,
+    "status": 5,
+    "created_at": "2024-08-29T13:53:49.951Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 9,
+  "fields": {
+    "name": "Начать 7 шаг",
+    "description": "",
+    "author": 2,
+    "executor": 3,
+    "status": 10,
+    "created_at": "2024-08-29T14:27:06.069Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 10,
+  "fields": {
+    "name": "Закончить 8 шаг",
+    "description": "",
+    "author": 7,
+    "executor": 8,
+    "status": 3,
+    "created_at": "2024-08-29T14:28:08.702Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 11,
+  "fields": {
+    "name": "Задача Гюндо",
+    "description": "",
+    "author": 5,
+    "executor": 7,
+    "status": 1,
+    "created_at": "2024-08-29T14:37:36.086Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 12,
+  "fields": {
+    "name": "Заняться переводом для locale",
+    "description": "",
+    "author": 7,
+    "executor": 8,
+    "status": 3,
+    "created_at": "2024-08-30T07:11:24.624Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 13,
+  "fields": {
+    "name": "Проверка Ролбар",
+    "description": "",
+    "author": 7,
+    "executor": 1,
+    "status": 3,
+    "created_at": "2024-08-30T11:19:36.825Z"
+  }
+}
+]

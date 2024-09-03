@@ -1,0 +1,50 @@
+[
+{
+  "model": "labels.label",
+  "pk": 1,
+  "fields": {
+    "name": "работа",
+    "created_at": "2024-08-28T12:29:12.730Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 2,
+  "fields": {
+    "name": "досуг",
+    "created_at": "2024-08-28T12:31:10.140Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 5,
+  "fields": {
+    "name": "спорт",
+    "created_at": "2024-08-29T11:21:06.356Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 7,
+  "fields": {
+    "name": "культура",
+    "created_at": "2024-08-29T11:21:28.327Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 9,
+  "fields": {
+    "name": "развлечения",
+    "created_at": "2024-08-29T14:26:02.453Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 10,
+  "fields": {
+    "name": "обучение",
+    "created_at": "2024-08-29T14:26:16.147Z"
+  }
+}
+]
