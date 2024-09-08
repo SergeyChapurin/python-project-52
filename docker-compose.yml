@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:12
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=db_name
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432" # порт 5432 был занят
+
+  web:
+    build:
+      context: .  # указывает на текущую директорию для построения Dockerfile
+      dockerfile: Dockerfile  # имя моего Dockerfile
+    command: poetry run gunicorn -w 5 -b 0.0.0.0:8000 task_manager.wsgi:application
+    volumes:
+      - .:/app  # монтирует текущую директорию в контейнер
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pg_data:

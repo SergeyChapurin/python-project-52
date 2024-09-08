@@ -1,11 +1,14 @@
 *.egg-info
 __pycache__
 dist/
+htmlcov/
 *.pyc
 .whl
 .venv/
+venv/
 .coverage
 coverage.xml
 .pytest_cache/
 .idea
 .env
+get-docker.sh

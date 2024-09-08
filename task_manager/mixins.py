@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseRedirect
+from django.db.models import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
@@ -33,7 +33,7 @@ class CheckUserMixin(UserPassesTestMixin):
             self.permission_denied_message,
             extra_tags='danger'
         )
-        return HttpResponseRedirect(reverse_lazy('users_index'))
+        return redirect(reverse_lazy('users_index'))
 
 
 class CheckAuthorMixin(UserPassesTestMixin):
@@ -49,4 +49,20 @@ class CheckAuthorMixin(UserPassesTestMixin):
             self.permission_denied_message,
             extra_tags='danger'
         )
-        return HttpResponseRedirect(reverse_lazy('tasks_index'))
+        return redirect(reverse_lazy('tasks_index'))
+
+
+class ProtectedErrorMixin:
+    error_message = _("Невозможно удалить пользователя, потому что он используется")
+    redirect_url = 'users_index'
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(
+                request,
+                self.error_message,
+                extra_tags='danger'
+            )
+            return redirect(self.redirect_url)

@@ -1,10 +1,19 @@
 from django.utils.translation import gettext as _
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 from task_manager.users.forms import UsersForm
 from task_manager.users.models import User
-from task_manager.mixins import CustomLoginRequiredMixin, CheckUserMixin
+from task_manager.mixins import (
+    CustomLoginRequiredMixin,
+    CheckUserMixin,
+    ProtectedErrorMixin
+)
 
 
 class UsersIndexView(ListView):
@@ -35,6 +44,7 @@ class UserUpdateView(CustomLoginRequiredMixin,
 class UserDeleteView(CustomLoginRequiredMixin,
                      CheckUserMixin,
                      SuccessMessageMixin,
+                     ProtectedErrorMixin,
                      DeleteView):
     model = User
     template_name = 'users/user_delete.html'
